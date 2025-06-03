@@ -1,6 +1,6 @@
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9f9f9;
+  background-color: #eef6f3; /* verde chiaro, rilassante */
   margin: 0;
   padding: 0;
 }
@@ -26,10 +26,10 @@ body {
 }
 
 .card {
-  background: white;
+  background: #ffffff;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   cursor: pointer;
   user-select: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.3s ease;
@@ -40,14 +40,14 @@ body {
 .card:hover,
 .card:focus {
   transform: translateY(-5px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
   border-color: #004d40;
 }
 
 .card.selected {
   border-color: #00796b;
   background-color: #e0f2f1;
-  box-shadow: 0 8px 20px rgba(0, 121, 107, 0.5);
+  box-shadow: 0 8px 20px rgba(0, 121, 107, 0.3);
 }
 
 .skip-title {
@@ -66,15 +66,15 @@ body {
 p {
   margin: 6px 0;
   font-size: 0.9rem;
-  color: #555;
+  color: #444;
 }
 
 .details {
   margin-top: 40px;
   padding: 20px;
-  background-color: #e0f2f1;
+  background-color: #d5edea;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 121, 107, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 121, 107, 0.15);
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
@@ -97,16 +97,17 @@ p {
 }
 
 .clear-button {
-  background-color: #931f1ff6;
+  background-color: #931f1f;
   border: none;
   color: white;
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background-color 0.3s;
+  margin-left: 10px;
 }
 
 .clear-button:hover {
-  background-color: #cfcfcf;
+  background-color: #7a1717;
 }

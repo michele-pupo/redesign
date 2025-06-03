@@ -22,8 +22,6 @@ const App = () => {
   const [data, setData] = useState<Skip[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedSkipId, setSelectedSkipId] = useState<number | null>(null);
-
-  // Ref for the details section
   const detailsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -39,7 +37,6 @@ const App = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  // Auto-scroll to details section on selection
   useEffect(() => {
     if (detailsRef.current) {
       detailsRef.current.scrollIntoView({ behavior: "smooth" });
@@ -56,7 +53,7 @@ const App = () => {
       <h1 className="title">Choose Your Skip Size</h1>
 
       <div className="grid">
-        {data.map((skip: Skip) => (
+        {data.map((skip) => (
           <div
             key={skip.id}
             className={`card ${selectedSkipId === skip.id ? "selected" : ""}`}
@@ -111,12 +108,18 @@ const App = () => {
                 alert(`You selected ${selectedSkip.size} yard skip!`)
               }
             >
+              <span role="img" aria-label="cart">
+                🛒
+              </span>
               Book Now
             </button>
             <button
               className="clear-button"
               onClick={() => setSelectedSkipId(null)}
             >
+              <span role="img" aria-label="trash">
+                🗑️
+              </span>
               Clear Selection
             </button>
           </div>
