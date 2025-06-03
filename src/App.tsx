@@ -16,6 +16,9 @@ type Skip = {
   updated_at: string;
   per_tonne_cost: number | null;
   transport_cost: number | null;
+  // New fields for badges
+  most_popular?: boolean;
+  best_value?: boolean;
 };
 
 const App = () => {
@@ -30,8 +33,13 @@ const App = () => {
     )
       .then((res) => res.json())
       .then((json) => {
-        setData(json);
-        if (json.length > 0) setSelectedSkipId(json[0].id);
+        // For demo, manually add badge flags to some skips
+        const enriched = json.map((skip: Skip, index: number) => ({
+          ...skip,
+          most_popular: index === 1, // second item is most popular
+          best_value: index === 2, // third item is best value
+        }));
+        setData(enriched);
       })
       .catch((err) => console.error("Fetch error:", err))
       .finally(() => setLoading(false));
@@ -58,7 +66,10 @@ const App = () => {
             key={skip.id}
             className={`card 
               ${selectedSkipId === skip.id ? "selected" : ""} 
-              ${skip.forbidden ? "unavailable" : ""}`}
+              ${skip.forbidden ? "unavailable" : ""}
+              ${skip.most_popular ? "most-popular" : ""}
+              ${skip.best_value ? "best-value" : ""}
+            `}
             onClick={() => !skip.forbidden && setSelectedSkipId(skip.id)}
             role="button"
             tabIndex={skip.forbidden ? -1 : 0}
@@ -69,6 +80,16 @@ const App = () => {
             }}
             aria-disabled={skip.forbidden}
           >
+            {/* Badge container */}
+            <div className="badge-container">
+              {skip.most_popular && (
+                <span className="badge popular">Most Popular</span>
+              )}
+              {skip.best_value && (
+                <span className="badge value">Best Value</span>
+              )}
+            </div>
+
             <h2 className="skip-title">{skip.size} Yard Skip</h2>
             <p className="price">
               £{(skip.price_before_vat * (1 + skip.vat / 100)).toFixed(2)} inc

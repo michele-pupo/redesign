@@ -118,3 +118,38 @@ p {
   opacity: 0.6;
   pointer-events: none; /* disables clicks */
 }
+
+.badge-container {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 12px;
+  color: white;
+  user-select: none;
+}
+
+.badge.popular {
+  background-color: #e67e22;
+}
+
+.badge.value {
+  background-color: #27ae60;
+}
+
+.card.most-popular {
+  border-color: #e67e22;
+  box-shadow: 0 0 12px 3px rgba(230, 126, 34, 0.5);
+  background-color: #fff4e6;
+}
+
+.card.best-value {
+  border-color: #27ae60;
+  box-shadow: 0 0 12px 3px rgba(39, 174, 96, 0.5);
+  background-color: #e6f9e8;
+}
