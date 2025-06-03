@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./styles.css";
 
 type Skip = {
@@ -23,6 +23,9 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [selectedSkipId, setSelectedSkipId] = useState<number | null>(null);
 
+  // for details section
+  const detailsRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     fetch(
       "https://app.wewantwaste.co.uk/api/skips/by-location?postcode=NR32&area=Lowestoft"
@@ -30,20 +33,23 @@ const App = () => {
       .then((res) => res.json())
       .then((json) => {
         setData(json);
-        // Se vuoi selezionare il primo skip appena arriva il dato:
         if (json.length > 0) setSelectedSkipId(json[0].id);
       })
       .catch((err) => console.error("Fetch error:", err))
       .finally(() => setLoading(false));
   }, []);
 
+  // automatic scroll on selection
+  useEffect(() => {
+    if (detailsRef.current) {
+      detailsRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [selectedSkipId]);
+
   if (loading) return <p>Loading...</p>;
   if (!data || data.length === 0) return <p>No skips available.</p>;
 
-  // QUI dichiarazione di selectedSkip, **prima del return**
   const selectedSkip = data.find((skip) => skip.id === selectedSkipId);
-  console.log("Selected Skip ID:", selectedSkipId);
-  console.log("Selected Skip Object:", selectedSkip);
 
   return (
     <div className="container">
@@ -76,7 +82,7 @@ const App = () => {
       </div>
 
       {selectedSkip && (
-        <div className="details">
+        <div className="details" ref={detailsRef}>
           <h2>Details for {selectedSkip.size} Yard Skip</h2>
           <p>Price (before VAT): £{selectedSkip.price_before_vat.toFixed(2)}</p>
           <p>VAT: {selectedSkip.vat}%</p>
@@ -87,15 +93,15 @@ const App = () => {
           </p>
           <p>
             Per tonne cost:{" "}
-            {selectedSkip.per_tonne_cost
-              ? `£${selectedSkip.per_tonne_cost}`
-              : "N/A"}
+            {selectedSkip.per_tonne_cost !== null
+              ? `£${selectedSkip.per_tonne_cost.toFixed(2)}`
+              : "Not specified"}
           </p>
           <p>
             Transport cost:{" "}
-            {selectedSkip.transport_cost
-              ? `£${selectedSkip.transport_cost}`
-              : "N/A"}
+            {selectedSkip.transport_cost !== null
+              ? `£${selectedSkip.transport_cost.toFixed(2)}`
+              : "Not specified"}
           </p>
           <button
             className="book-button"
