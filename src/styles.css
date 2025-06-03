@@ -73,9 +73,27 @@ body {
 
 .card.selected {
   border-color: #00796b;
-  background-color: #b2dfdb !important;
-  box-shadow: 0 0 20px rgba(0, 121, 107, 0.5);
-  z-index: 1;
+  background-color: #e0f2f1;
+  box-shadow: 0 6px 20px rgba(0, 121, 107, 0.35);
+  transform: scale(1.02);
+  z-index: 2;
+  transition: transform 0.3s ease, box-shadow 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.card.selected::after {
+  content: "✓ Selected";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #00796b;
+  color: white;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card.road-allowed {
