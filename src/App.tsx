@@ -66,9 +66,10 @@ const App = () => {
             key={skip.id}
             className={`card 
               ${selectedSkipId === skip.id ? "selected" : ""} 
-              ${skip.forbidden ? "unavailable" : ""}
-              ${skip.most_popular ? "most-popular" : ""}
-              ${skip.best_value ? "best-value" : ""}
+              ${skip.forbidden ? "unavailable" : ""} 
+              ${skip.most_popular ? "most-popular" : ""} 
+              ${skip.best_value ? "best-value" : ""} 
+              ${skip.allowed_on_road ? "road-allowed" : "road-denied"}
             `}
             onClick={() => !skip.forbidden && setSelectedSkipId(skip.id)}
             role="button"
@@ -80,6 +81,9 @@ const App = () => {
             }}
             aria-disabled={skip.forbidden}
           >
+            <span className="road-badge">
+              {skip.allowed_on_road ? "Road Approved" : "Not Road Approved"}
+            </span>
             <img src="/images/skip.png" alt="Skip" className="card-image" />
 
             <div className="badge-container">
@@ -97,7 +101,6 @@ const App = () => {
               VAT
             </p>
             <p>Hire period: {skip.hire_period_days} days</p>
-            <p>Allowed on road: {skip.allowed_on_road ? "✔️ Yes" : "❌ No"}</p>
             <p>Heavy waste: {skip.allows_heavy_waste ? "✔️ Yes" : "❌ No"}</p>
           </div>
         ))}
