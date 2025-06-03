@@ -26,9 +26,14 @@ body {
 
 .title {
   text-align: center;
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  font-size: 1.7rem;
+  margin-bottom: 1.5rem;
   color: #00796b;
+}
+
+.subtitle {
+  font-size: 1.4rem;
+  color: #555;
 }
 
 /* ===============================
@@ -345,8 +350,14 @@ body {
 
 @media (max-width: 600px) {
   .title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     margin-bottom: 20px;
+  }
+
+  @media (max-width: 600px) {
+    .subtitle {
+      font-size: 1rem;
+    }
   }
 
   .card {

@@ -58,7 +58,12 @@ const App = () => {
 
   return (
     <div className="container">
-      <h1 className="title">Choose Your Skip Size</h1>
+      <div className="title">
+        <h1>Choose Your Skip Size</h1>
+        <p className="subtitle">
+          Select the skip size that best suits your needs
+        </p>
+      </div>
 
       <div className="grid">
         {data.map((skip) => (
