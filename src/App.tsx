@@ -23,7 +23,7 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [selectedSkipId, setSelectedSkipId] = useState<number | null>(null);
 
-  // for details section
+  // Ref for the details section
   const detailsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const App = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  // automatic scroll on selection
+  // Auto-scroll to details section on selection
   useEffect(() => {
     if (detailsRef.current) {
       detailsRef.current.scrollIntoView({ behavior: "smooth" });
@@ -103,14 +103,23 @@ const App = () => {
               ? `£${selectedSkip.transport_cost.toFixed(2)}`
               : "Not specified"}
           </p>
-          <button
-            className="book-button"
-            onClick={() =>
-              alert(`You selected ${selectedSkip.size} yard skip!`)
-            }
-          >
-            Book Now
-          </button>
+
+          <div className="button-group">
+            <button
+              className="book-button"
+              onClick={() =>
+                alert(`You selected ${selectedSkip.size} yard skip!`)
+              }
+            >
+              Book Now
+            </button>
+            <button
+              className="clear-button"
+              onClick={() => setSelectedSkipId(null)}
+            >
+              Clear Selection
+            </button>
+          </div>
         </div>
       )}
     </div>

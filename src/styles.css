@@ -95,3 +95,18 @@ p {
 .book-button:hover {
   background-color: #004d40;
 }
+
+.clear-button {
+  background-color: #931f1ff6;
+  border: none;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.clear-button:hover {
+  background-color: #cfcfcf;
+}
