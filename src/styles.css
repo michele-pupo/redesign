@@ -8,7 +8,7 @@
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #eef6f3; /* soft green */
+  background-color: #eef6f3;
   margin: 0;
   padding: 0;
   line-height: 1.5;
@@ -66,7 +66,6 @@ body {
   border-color: #004d40;
 }
 
-/* Selected card style – overrides any other background/border */
 .card.selected {
   border-color: #00796b;
   background-color: #b2dfdb !important;
@@ -74,21 +73,18 @@ body {
   z-index: 1;
 }
 
-/* Road-approved card style */
 .card.road-allowed {
   border: 2px solid #2e7d32;
   box-shadow: 0 0 12px 2px rgba(46, 125, 50, 0.3);
   background-color: #e8f5e9;
 }
 
-/* Not road-approved card style */
 .card.road-denied {
   border: 2px dashed #c62828;
   box-shadow: 0 0 12px 2px rgba(198, 40, 40, 0.15);
   background-color: #ffebee;
 }
 
-/* Badge shown in top-right of the card */
 .road-badge {
   position: absolute;
   top: 10px;
@@ -149,23 +145,32 @@ body {
   display: flex;
   gap: 6px;
   margin-bottom: 0.5rem;
+  align-items: center;
 }
 
 .badge {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
-  padding: 2px 8px;
+  padding: 2px 6px;
   border-radius: 12px;
   color: white;
   user-select: none;
+  line-height: 1.2;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  transition: box-shadow 0.3s ease;
 }
 
 .badge.popular {
   background-color: #e67e22;
+  animation: pulsePopular 1.5s infinite ease-in-out;
 }
 
 .badge.value {
   background-color: #2980b9;
+  animation: pulseValue 1.5s infinite ease-in-out;
 }
 
 /* ===============================
@@ -174,14 +179,82 @@ body {
 
 .card.most-popular {
   border-color: #e67e22;
-  box-shadow: 0 0 12px 3px rgba(230, 126, 34, 0.5);
+  box-shadow: 0 0 10px 3px rgba(230, 126, 34, 0.5);
   background-color: #fff4e6;
+  transition: box-shadow 0.3s ease;
 }
 
 .card.best-value {
   border-color: #2980b9;
-  box-shadow: 0 0 12px 3px rgba(41, 128, 185, 0.5);
+  box-shadow: 0 0 10px 3px rgba(41, 128, 185, 0.5);
   background-color: #eaf4fb;
+  transition: box-shadow 0.3s ease;
+}
+
+/* ===============================
+   Badge Heavy Waste
+================================= */
+
+.heavy-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #6a1b9a;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.badge.heavy {
+  background-color: #4b0082;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  margin: 4px 0;
+  display: inline-block;
+}
+
+.card.heavy-waste {
+  border-color: #4b0082;
+  box-shadow: 0 0 10px 3px rgba(75, 0, 130, 0.5);
+  background-color: #f3e8ff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.card.heavy-waste:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(75, 0, 130, 0.5);
+}
+
+/* ===============================
+   Pulse Animations for Popular & Value Badges
+================================= */
+
+@keyframes pulsePopular {
+  0% {
+    box-shadow: 0 0 0 0 rgba(230, 126, 34, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(230, 126, 34, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(230, 126, 34, 0);
+  }
+}
+
+@keyframes pulseValue {
+  0% {
+    box-shadow: 0 0 0 0 rgba(41, 128, 185, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(41, 128, 185, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(41, 128, 185, 0);
+  }
 }
 
 /* ===============================

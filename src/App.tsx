@@ -65,12 +65,13 @@ const App = () => {
           <div
             key={skip.id}
             className={`card 
-              ${selectedSkipId === skip.id ? "selected" : ""} 
-              ${skip.forbidden ? "unavailable" : ""} 
-              ${skip.most_popular ? "most-popular" : ""} 
-              ${skip.best_value ? "best-value" : ""} 
-              ${skip.allowed_on_road ? "road-allowed" : "road-denied"}
-            `}
+            ${selectedSkipId === skip.id ? "selected" : ""} 
+            ${skip.forbidden ? "unavailable" : ""} 
+            ${skip.most_popular ? "most-popular" : ""} 
+            ${skip.best_value ? "best-value" : ""} 
+            ${skip.allowed_on_road ? "road-allowed" : "road-denied"}
+            ${skip.allows_heavy_waste ? "heavy-waste" : ""}
+          `}
             onClick={() => !skip.forbidden && setSelectedSkipId(skip.id)}
             role="button"
             tabIndex={skip.forbidden ? -1 : 0}
@@ -93,6 +94,9 @@ const App = () => {
               {skip.best_value && (
                 <span className="badge value">Best Value</span>
               )}
+              {skip.allows_heavy_waste && (
+                <span className="badge heavy">Heavy Waste</span>
+              )}
             </div>
 
             <h2 className="skip-title">{skip.size} Yard Skip</h2>
@@ -101,7 +105,6 @@ const App = () => {
               VAT
             </p>
             <p>Hire period: {skip.hire_period_days} days</p>
-            <p>Heavy waste: {skip.allows_heavy_waste ? "✔️ Yes" : "❌ No"}</p>
           </div>
         ))}
       </div>
