@@ -68,3 +68,30 @@ p {
   font-size: 0.9rem;
   color: #555;
 }
+
+.details {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #e0f2f1;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 121, 107, 0.2);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.book-button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  background-color: #00796b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.book-button:hover {
+  background-color: #004d40;
+}

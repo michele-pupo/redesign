@@ -30,6 +30,8 @@ const App = () => {
       .then((res) => res.json())
       .then((json) => {
         setData(json);
+        // Se vuoi selezionare il primo skip appena arriva il dato:
+        if (json.length > 0) setSelectedSkipId(json[0].id);
       })
       .catch((err) => console.error("Fetch error:", err))
       .finally(() => setLoading(false));
@@ -37,6 +39,11 @@ const App = () => {
 
   if (loading) return <p>Loading...</p>;
   if (!data || data.length === 0) return <p>No skips available.</p>;
+
+  // QUI dichiarazione di selectedSkip, **prima del return**
+  const selectedSkip = data.find((skip) => skip.id === selectedSkipId);
+  console.log("Selected Skip ID:", selectedSkipId);
+  console.log("Selected Skip Object:", selectedSkip);
 
   return (
     <div className="container">
@@ -47,10 +54,7 @@ const App = () => {
           <div
             key={skip.id}
             className={`card ${selectedSkipId === skip.id ? "selected" : ""}`}
-            onClick={() => {
-              console.log("Selected skip id:", skip.id);
-              setSelectedSkipId(skip.id);
-            }}
+            onClick={() => setSelectedSkipId(skip.id)}
             role="button"
             tabIndex={0}
             onKeyDown={(e) => {
@@ -70,6 +74,39 @@ const App = () => {
           </div>
         ))}
       </div>
+
+      {selectedSkip && (
+        <div className="details">
+          <h2>Details for {selectedSkip.size} Yard Skip</h2>
+          <p>Price (before VAT): £{selectedSkip.price_before_vat.toFixed(2)}</p>
+          <p>VAT: {selectedSkip.vat}%</p>
+          <p>Hire period: {selectedSkip.hire_period_days} days</p>
+          <p>Allowed on road: {selectedSkip.allowed_on_road ? "Yes" : "No"}</p>
+          <p>
+            Allows heavy waste: {selectedSkip.allows_heavy_waste ? "Yes" : "No"}
+          </p>
+          <p>
+            Per tonne cost:{" "}
+            {selectedSkip.per_tonne_cost
+              ? `£${selectedSkip.per_tonne_cost}`
+              : "N/A"}
+          </p>
+          <p>
+            Transport cost:{" "}
+            {selectedSkip.transport_cost
+              ? `£${selectedSkip.transport_cost}`
+              : "N/A"}
+          </p>
+          <button
+            className="book-button"
+            onClick={() =>
+              alert(`You selected ${selectedSkip.size} yard skip!`)
+            }
+          >
+            Book Now
+          </button>
+        </div>
+      )}
     </div>
   );
 };
