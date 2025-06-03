@@ -56,15 +56,18 @@ const App = () => {
         {data.map((skip) => (
           <div
             key={skip.id}
-            className={`card ${selectedSkipId === skip.id ? "selected" : ""}`}
-            onClick={() => setSelectedSkipId(skip.id)}
+            className={`card 
+              ${selectedSkipId === skip.id ? "selected" : ""} 
+              ${skip.forbidden ? "unavailable" : ""}`}
+            onClick={() => !skip.forbidden && setSelectedSkipId(skip.id)}
             role="button"
-            tabIndex={0}
+            tabIndex={skip.forbidden ? -1 : 0}
             onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
+              if ((e.key === "Enter" || e.key === " ") && !skip.forbidden) {
                 setSelectedSkipId(skip.id);
               }
             }}
+            aria-disabled={skip.forbidden}
           >
             <h2 className="skip-title">{skip.size} Yard Skip</h2>
             <p className="price">
@@ -108,7 +111,7 @@ const App = () => {
                 alert(`You selected ${selectedSkip.size} yard skip!`)
               }
             >
-              <span role="img" aria-label="cart">
+              <span role="img" aria-label="cart" style={{ marginRight: 6 }}>
                 🛒
               </span>
               Book Now
