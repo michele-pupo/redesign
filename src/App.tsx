@@ -80,7 +80,8 @@ const App = () => {
             }}
             aria-disabled={skip.forbidden}
           >
-            {/* Badge container */}
+            <img src="/images/skip.png" alt="Skip" className="card-image" />
+
             <div className="badge-container">
               {skip.most_popular && (
                 <span className="badge popular">Most Popular</span>
